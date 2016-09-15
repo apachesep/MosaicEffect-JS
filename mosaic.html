@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="js/mosaic.js"></script>
+    <script type="text/javascript" src="js/client.js"></script>
+    <title>Mosaic</title>
+  </head>
+  <body>
+    <!-- Edit me. -->
+    <canvas id="canvas"></canvas>
+    <canvas id="mosaic"></canvas>
+  <script>
+      var img = new Image();
+      img.src = 'image2.jpg';
+      img.onload = function() {
+          new MosaicEffect({
+              image: img,
+              originCanvas: document.getElementById('canvas'),
+              targetCanvas: document.getElementById('mosaic'),
+              tileHeight: TILE_HEIGHT,
+              tileWidth: TILE_WIDTH,
+              height: img.height,
+              width: img.width
+          })
+      };
+
+  </script>
+  </body>
+</html>
