@@ -1,43 +1,46 @@
-/**
- * Created by Admin on 9/15/16.
- */
-(function (window) {
-    'use strict';
 
-    function MosaicEffect(vars) {
-        this.vars = vars;
+// setup elements
+var fileEl = document.getElementById('file'),
+	targetCanvasEl = document.getElementById('mosaic'),
+	progressBar = document.getElementById('progress'),
+	uploaderEl = document.getElementById('uploader'),
+	fileLabelEl = document.getElementById('file-label')
 
-        if (vars.image.complete) {
-            this.applyEffect()
-        }
-    }
+/*
+*	This function is used to apply effect after image selected
+*	FileReader is used to read image data
+*	then send it to apply mosaic effect \m/
+*/
+function apply() {
 
-    MosaicEffect.prototype.applyEffect = function () {
-        var vars = this.vars;
+	var fileImage = document.getElementById('file').files[0]
+	try {
+		if (fileImage.name != undefined) {
+			progressBar.style.display = 'inline-block'
 
-        // number of vertical tiles
-        var xTiles = Math.floor(vars.width / vars.TILE_WIDTH);
+			document.getElementById('file-label').innerHTML = 'loading ' + fileImage.name
 
-        // number of horizontal tiles
-        var yTiles = Math.floor(vars.height / vars.TILE_HEIGHT);
+			var renderImage = new Image();
+			var fr = new FileReader();
+			fr.onload = function () {
+				renderImage.src = fr.result;
+			}
 
-
-        // display image into original canvas
-        var originCtx = vars.originCanvas.getContext('2d');
-        originCtx.drawImage(vars.image, 0, 0);
-
-        var calWorker = new Worker('worker.js');
-        calWorker.onmessage = function (e) {
-            var imgData = originCtx.getImageData(e.data.x, e.data.y, e.data.width, e.data.height);
-            drawSquare(imgData)
-        }
-
-    };
-
-    MosaicEffect.prototype.drawSquare = function (imgData) {
-
-    }
-
-    window.MosaicEffect = MosaicEffect;
-
-}(window));
+			renderImage.onload = function () {
+				
+				// apply effect
+				new MosaicEffect({
+					image: this,
+					targetCanvas: targetCanvasEl,
+					progressBar: progressBar,
+					uploaderEl: uploaderEl,
+					height: this.height,
+					width: this.width
+				})
+			}
+			fr.readAsDataURL(fileImage);
+		}
+	} catch (error) {
+		// case fileImage.name undefined
+	}
+}

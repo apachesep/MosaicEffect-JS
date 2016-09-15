@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript" src="js/mosaic.js"></script>
-    <script type="text/javascript" src="js/client.js"></script>
-    <title>Mosaic</title>
-  </head>
-  <body>
-    <!-- Edit me. -->
-    <canvas id="canvas"></canvas>
-    <canvas id="mosaic"></canvas>
-  <script>
-      var img = new Image();
-      img.src = 'image2.jpg';
-      img.onload = function() {
-          new MosaicEffect({
-              image: img,
-              originCanvas: document.getElementById('canvas'),
-              targetCanvas: document.getElementById('mosaic'),
-              tileHeight: TILE_HEIGHT,
-              tileWidth: TILE_WIDTH,
-              height: img.height,
-              width: img.width
-          })
-      };
 
-  </script>
-  </body>
+<head>
+	<script type="text/javascript" src="js/mosaic.js"></script>
+	
+
+	<title>Mosaic</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+</head>
+
+<body>
+
+	<!--	Uploader	-->
+	<nav class="uploader" id="uploader">
+		<label for="file" id='file-label'>Choose an image</label>
+		<input id="file" name="file" onchange='apply()' type="file">
+		<progress id="progress" value="0" max="0"></progress>
+	</nav>
+	<!--	END: Uploader	-->
+	
+	<!--	Rendering Canvas	-->
+	<section class="target-image">
+		<canvas id="mosaic" class="hide"></canvas>
+	</section>
+	<!--	END: Rendering Canvas	-->
+	
+	<script type="text/javascript" src="js/client.js"></script>
+	<script type="text/javascript" src="js/mosaic-effect.js"></script>
+</body>
+
 </html>
