@@ -1,6 +1,29 @@
-Photo mosaic
-------------
+# Mosaic Photo Effect
+---
 
+Front-end app for applying mosaic effect to images (.JPEG, .PNG, .GIF) using nodejs and javascript
+
+## How to use
+
+```javascript
+	
+	// applying effect
+	new MosaicEffect({
+		image: imageFile, 				// original image
+		targetCanvas: targetCanvasEl, 	// canvas display mosaic image
+		progressBar: progressBar,		// progress bar indicator <progress></progress>
+		uploaderEl: uploaderEl,			// container element for upload elements (such as input[type=file], label)
+		height: imageHeight,			// mosaic image height
+		width: imageWidth				// mosaic image width
+	})
+```
+See more inside demo folder
+
+### Run Nodejs server
+> node server.js
+
+## How does it works
+```
 The goal of this task is to implement the following flow in a client-side app.
 1. A user selects a local image file.
 2. The app loads that image, divides the image into tiles, computes the average
@@ -21,3 +44,4 @@ serving the client app and the tile images. To start it, run npm start.
 
 The tile size should be configurable via the code constants in js/mosaic.js.
 The project skeleton is already set up to include those constants in both the
+```
