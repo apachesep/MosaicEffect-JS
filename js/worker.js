@@ -46,12 +46,15 @@ function calculateColor(x, y, imgData) {
         i = -4,
         count = 0
 	
+	// detached data to enhance performance
+	var imageData = imgData.data
+	
 	// get rgb values
     while ((i += blockSize * 4) < length) {
         ++count;
-        rgb.r += imgData.data[i];
-        rgb.g += imgData.data[i + 1];
-        rgb.b += imgData.data[i + 2];
+        rgb.r += imageData[i];
+        rgb.g += imageData[i + 1];
+        rgb.b += imageData[i + 2];
     }
 	
 	// get an int as average value of each color represent
