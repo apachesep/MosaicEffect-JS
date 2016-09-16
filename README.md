@@ -1,4 +1,5 @@
 # Mosaic Photo Effect
+
 ---
 
 Front-end app for applying mosaic effect to images (.JPEG, .PNG, .GIF) using nodejs and javascript
